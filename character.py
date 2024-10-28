@@ -3,7 +3,7 @@ class Character:
         self.__hp:int = 20
         self.__atk:int = 2
         self.__defense:int = 0
-# base class/object for all things living with base values
+    # base class/object for all things living with base values
 
     def getHP(self):
         return self.__hp

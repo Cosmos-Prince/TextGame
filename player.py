@@ -12,6 +12,9 @@ class Player(Character):
 # creates player class, adding onto the character class giving it pots, xp, and gold
   
     def potionDrinking(self):
+        if self.__pots <= 0:
+            print("You don't have any remaining potions, you can buy some more next time you visit a shop")
+            return
         self.__pots -= 1
         self.heal(diceRoll(1, 4, 2))
     # function to make drinking potions, heals by 1d4 + 2 and removes 1 potion from player inventory
@@ -23,7 +26,7 @@ class Player(Character):
     # gives the player gold and xp per enemy kill and checks if the player can lvl up
     
     def lvlUp(self):
-        if self.__xp // 100:
+        if self.__xp >= 100:
             self.__level += 1
             self.__xp -= 100
             self.__atk += 2
