@@ -9,8 +9,14 @@ class Player(Character):
         self.__xp:int = 0
         self.__gold:int = 0
         self.__level:int = 1
-# creates player class, adding onto the character class giving it pots, xp, and gold
-  
+    # creates player class, adding onto the character class giving it pots, xp, and gold
+
+    
+    def getPots(self):
+        return self.__pots
+    # allows to see the number of potions left in the inventory
+    
+    
     def potionDrinking(self):
         if self.__pots <= 0:
             print("You don't have any remaining potions, you can buy some more next time you visit a shop")
