@@ -1,3 +1,5 @@
+from functions import diceRoll
+
 class Character:
     def __init__ (self):
         self.__hp:int = 20
@@ -12,7 +14,20 @@ class Character:
         return self.__atk
     def getDefense(self):
         return self.__defense
+    def getDefenseUP(self):
+        return self.__defenseUP
     #creates functions to return values to child
+    
+    def defend(self):
+        defence:int = diceRoll(1, 4, 1)
+        self.__defenseUP = defence
+        return defence
+    # function to set defense when actively blocking during a turn
+        
+    def turnStart(self):
+        self.__defenseUP = 0
+    # function to dictate stuff that needs to happen on turn start
+    # for now only defense is reset to 0 but might add more later
     
     def heal(self, healAmmount:int):
         self.__hp += healAmmount
