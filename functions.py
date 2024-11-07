@@ -1,6 +1,4 @@
 import random
-from Main import player1
-from Main import enemy
 
 def diceRoll(numberOfDices:int , diceSize:int, modifier:int) -> int:
     roll:int = 0 
@@ -14,6 +12,8 @@ def diceRoll(numberOfDices:int , diceSize:int, modifier:int) -> int:
 def askInput(choices:list):
     # prints the choices for the user
     print("Please choose your next action...")
+    for i in range(0, len(choices)):
+        print(f"{i+1}-" + choices[i])
     while True:
         try:
             # tries to convert the input to an int, if succeed, return the int

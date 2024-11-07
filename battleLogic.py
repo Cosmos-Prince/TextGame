@@ -1,5 +1,6 @@
 from Main import player1
 from functions import *
+from Main import enemy
 
 
 def turnChoices():
