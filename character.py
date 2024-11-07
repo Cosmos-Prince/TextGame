@@ -10,6 +10,8 @@ class Character:
 
     def getHP(self):
         return self.__hp
+    def getAtk(self):
+        return self.__atk
     def getDmg(self):
         return self.__atk
     def getDefense(self):
@@ -32,8 +34,20 @@ class Character:
     def heal(self, healAmmount:int):
         self.__hp += healAmmount
     def hurt(self, dmgDealt:int):
-        if dmgDealt < self.__defense:
-            return
+        trueDmg:int = self.__defense + self.__defenseUP - dmgDealt
+        if trueDmg <=0:
+            if trueDmg < 0:
+                print(" h o w ")
+                # should never exist on god's green earth since dmg = abs() but hey you never know
+            else:
+                print("No damage was dealt.")
+                return 0
+                # if the dmg is 0, prints this
         else:
-            self.__hp = self.__hp - dmgDealt + self.__defense + self.__defenseUP
+            self.__hp += trueDmg
+            return abs(trueDmg)
+            # shows the dmg dealt using hurt function and calculates the new hp value
+    
     # functions to calculate healing and damage dealt to characters
+    
+    
