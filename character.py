@@ -3,6 +3,7 @@ class Character:
         self.__hp:int = 20
         self.__atk:int = 2
         self.__defense:int = 0
+        self.__defenseUP:int = 0
     # base class/object for all things living with base values
 
     def getHP(self):
@@ -19,5 +20,5 @@ class Character:
         if dmgDealt < self.__defense:
             return
         else:
-            self.__hp = self.__hp - dmgDealt + self.__defense 
+            self.__hp = self.__hp - dmgDealt + self.__defense + self.__defenseUP
     # functions to calculate healing and damage dealt to characters

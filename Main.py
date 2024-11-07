@@ -1,4 +1,4 @@
-import random    
+from character import *
 from player import *
 from functions import *
 
@@ -13,3 +13,5 @@ player1 = Player()
 
 enemy = Character()
 # creates enemy object
+
+askInput([" Heal yourself using a potion", " Attack the enemy", " Prepare to block the enemy's next attack"])

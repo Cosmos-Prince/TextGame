@@ -1,5 +1,4 @@
 import random
-from player import *
 from Main import player1
 from Main import enemy
 
@@ -12,25 +11,17 @@ def diceRoll(numberOfDices:int , diceSize:int, modifier:int) -> int:
 # creates a dice roll function, which calculates the total of the dice roll depending on the number and max value of the dice
 
 
-def askInput(choice):
-    choice:int = 0
+def askInput(choices:list):
+    # prints the choices for the user
     print("Please choose your next action...")
-    print("1- Heal yourself using a potion")
-    print("2- Attack the enemy")
-    print("3- Prepare to block the enemy's next attack")
-    choice = input()
-    # shows the option the player has
-    if choice < 1 and choice > 3:
-        print("Please choose a number associated to the action you wish to take.")
-    
-    match choice:
-        case 1:
-            player1.potionDrinking()
-            print(f"You now have {player1.getHP} and are left with {player1.getPots} potions")
-            # if user selects to heal, calls the drinking potion functions and displays the stats
-        case 2:
-            enemy.hurt(diceRoll(1, 20, player1.__atk))
-        case 3:
-            player1.getDefense  
-            
-            
+    while True:
+        try:
+            # tries to convert the input to an int, if succeed, return the int
+            number:int = int(input())
+            if number >=1 and number < len(choices) + 1:
+                return number
+            else:
+                print(f"Please input a valid number (between 1 and {len(choices)})")
+        except :
+            print("please input a number, not whatever the fuck you put there lmao")
+
