@@ -9,7 +9,7 @@ def turnChoices(player, opponent):
     match choice:
         case 1:
             player.potionDrinking()
-            print(f"You now have {player.getHP} and are left with {player.getPots} potions")
+            print(f"You now have {player.getHP()} hp and are left with {player.getPots()} potions")
             # if user selects to heal, calls the drinking potion functions and displays the stats
         case 2:
             dmg:int = opponent.hurt(diceRoll(1, 20, player.getAtk()))
@@ -32,7 +32,8 @@ def enemyChoice(opponent, player):
             if dmg == 0:
                 return
             else:
-                print(f"The enemy did {dmg} to you!")
+                print(f"The enemy did {dmg} dmg to you!")
+                
         case 2:
             d:int = opponent.defend()
             print(f"The opponent increased it's defense by {d}.")

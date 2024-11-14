@@ -2,7 +2,7 @@ from functions import diceRoll
 
 class Character:
     def __init__ (self):
-        self.__hp:int = 20
+        self.__hp:int = 40
         self.__atk:int = 2
         self.__defense:int = 0
         self.__defenseUP:int = 0
@@ -35,8 +35,8 @@ class Character:
         self.__hp += healAmmount
     def hurt(self, dmgDealt:int):
         trueDmg:int = self.__defense + self.__defenseUP - dmgDealt
-        if trueDmg <=0:
-            if trueDmg < 0:
+        if trueDmg >=0:
+            if trueDmg > 0:
                 print(" h o w ")
                 # should never exist on god's green earth since dmg = abs() but hey you never know
             else:
