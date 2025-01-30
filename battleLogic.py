@@ -12,7 +12,7 @@ def turnChoices(player, opponent):
             print(f"You now have {player.getHP()} hp and are left with {player.getPots()} potions")
             # if user selects to heal, calls the drinking potion functions and displays the stats
         case 2:
-            dmg:int = opponent.hurt(diceRoll(1, 20, player.getAtk()))
+            dmg:int = opponent.hurt(diceRoll(1, 8, player.getAtk()))
             if dmg == 0:
                 return
             else:
@@ -28,7 +28,7 @@ def enemyChoice(opponent, player):
     enemyChoice:int = random.randint(1,2)
     match enemyChoice:
         case 1:
-            dmg:int = player.hurt(diceRoll(1, 20, opponent.getAtk()))
+            dmg:int = player.hurt(diceRoll(1, 8, opponent.getAtk()))
             if dmg == 0:
                 return
             else:

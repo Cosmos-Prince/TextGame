@@ -1,5 +1,7 @@
 from character import *
 from functions import diceRoll
+import math
+
 
 class Player(Character):
     def __init__(self):
@@ -16,6 +18,9 @@ class Player(Character):
         return self.__pots
     # allows to see the number of potions left in the inventory
     
+    def getLvl(self):
+        return self.__level
+    # getter for player's level
     
     def potionDrinking(self):
         if self.__pots <= 0:
@@ -31,11 +36,17 @@ class Player(Character):
         self.lvlup()
     # gives the player gold and xp per enemy kill and checks if the player can lvl up
     
+    def xpToLvlUp(self):
+        return round(math.log(self.__lvl, 1.5)*100, None)
+    # function to calculate the the xp needed to lvl up
+
     def lvlUp(self):
-        if self.__xp >= 100:
+        if self.__xp >= self.xpToLvlUp():
             self.__level += 1
-            self.__xp -= 100
+            self.__xp -= self.xpToLvlUp()
             self.__atk += 2
             self.__hp += 10
             self.__defense += 1
-    # function to calculate lvl up (100 xp per lvl) and gives stats, resets xp back to xp - 100
+            print(f"Congrats! You are now level {self.getLvl()} and have increased your stats! ")
+    # function to calculate lvl up and gives stats, resets xp back to xp - xp needed to lvl up
+    
