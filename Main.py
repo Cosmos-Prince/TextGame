@@ -18,7 +18,7 @@ turnNumber:int = 1
 # initialises turnNumber
 
 while player1.getHP() > 0 or enemy.getHP() > 0:
-    print("\n")    
+    print("\n \n")    
     print("-" * 20, f"Turn {turnNumber}", "-" * 20)
     # header for each turn
     
@@ -29,12 +29,15 @@ while player1.getHP() > 0 or enemy.getHP() > 0:
     turnNumber += 1
     # counter to print out which turn we are at
     
+
+    #----- turn order -----
     
     turnChoices(player1, enemy)
     
     # runs player turn
     if enemy.getHP() <= 0:
         print("Congradulations, you defeated the enemy!")
+        player1.killRewards()
         break
         #checks if the player's hit killed
     

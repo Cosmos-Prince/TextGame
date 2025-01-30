@@ -37,4 +37,3 @@ def enemyChoice(opponent, player):
         case 2:
             d:int = opponent.defend()
             print(f"The opponent increased it's defense by {d}.")
-            
