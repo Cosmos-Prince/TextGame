@@ -25,3 +25,4 @@ def askInput(choices:list):
         except :
             print("please input a number, not whatever the fuck you put there lmao")
 
+
