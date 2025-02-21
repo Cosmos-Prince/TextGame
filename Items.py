@@ -54,56 +54,56 @@ class Weapon(Item):
 
 ###############   Helmets    ###############    
 
-Helmet1 = Helmet()
-Helmet2 = Helmet()
-Helmet3 = Helmet()
-Helmet4 = Helmet()
-Helmet5 = Helmet()
+Helmet1 = Helmet("Crâne reluisant", 40, 4)
+Helmet2 = Helmet("Yankee with no brim", 30, 3)
+Helmet3 = Helmet("Fallen king's crown", 20, 2)
+Helmet4 = Helmet("Perruque de Remilli", 10, 1)
+Helmet5 = Helmet("Une tuque aek dla broche", 50, 5)
 
 ###############    Chestplates    ###############
 
-Chest1 = Chest()
-Chest2 = Chest()
-Chest3 = Chest()
-Chest4 = Chest()
-Chest5 = Chest()
+Chest1 = Chest("Hoodie rouge à Émile", 50, 5)
+Chest2 = Chest("Diamond chestplate", 40, 4)
+Chest3 = Chest("Un beater blanc", 10, 1)
+Chest4 = Chest("Power Armor", 30, 3)
+Chest5 = Chest("")
 
 ###############    Arms    ###############
 
-Arms1 = Arms()
-Arms2 = Arms()
+Arms1 = Arms("Ein ti braclet d'amitié", 10, 1)
+Arms2 = Arms("")
 Arms3 = Arms()
 Arms4 = Arms()
 Arms5 = Arms()
 
 ###############    Pants    ###############
 
-Pants1 = Pants()
-Pants2 = Pants()
-Pants3 = Pants()
+Pants1 = Pants("Les pants a Super Fancy Pants Adventure", 30, 3)
+Pants2 = Pants("Joggings gris", 10, 1)
+Pants3 = Pants("")
 Pants4 = Pants()
 Pants5 = Pants()
 
 ###############    Feet    ###############
 
-Feet1 = Feet()
-Feet2 = Feet()
-Feet3 = Feet()
+Feet1 = Feet("Gougounnes", 10, 1)
+Feet2 = Feet("Timbs", 20, 2)
+Feet3 = Feet("")
 Feet4 = Feet()
 Feet5 = Feet()
 
 ###############    Misc~    ###############
 
-Misc1 = Misc()
-Misc2 = Misc()
-Misc3 = Misc()
-Misc4 = Misc()
-Misc5 = Misc()
-Misc6 = Misc()
-Misc7 = Misc()
-Misc8 = Misc()
-Misc9 = Misc()
-Misc10 = Misc()
+Misc1 = Misc("Skibidiamand", 20, "Damage", 2)
+Misc2 = Misc("Pierres aux reins dans un p'tit pot d'pillules", 40, "Damage", 4)
+Misc3 = Misc("Mené artéfact famillial Tassé", 20, "Defense", 2)
+Misc4 = Misc("Une garnotte", 10, "Damage", 1)
+Misc5 = Misc("Une roche", 20, "Damage", 2)
+Misc6 = Misc("Un pick de guit à Purok", 10, "Damage", 1)
+Misc7 = Misc("Steve", 20, "Damage", 2)
+Misc8 = Misc("J'ai des lunettes tu peux pas mfesser", 20, "Defense", 2)
+Misc9 = Misc("Une monster blanche", 30, "Damage", 3)
+Misc10 = Misc("Un des kids à Le Sau ?", 30, "Damage", 3)
 Misc11 = Misc()
 Misc12 = Misc()
 Misc13 = Misc()
@@ -112,10 +112,10 @@ Misc15 = Misc()
 
 ###############    Weapons    ###############
 
-Weapon1 = Weapon()
-Weapon2 = Weapon()
-Weapon3 = Weapon()
-Weapon4 = Weapon()
-Weapon5 = Weapon()
-Weapon6 = Weapon()
-Weapon7 = Weapon()
+Weapon1 = Weapon("Épée des cramptés", 60, 6)
+Weapon2 = Weapon("Quoicoupelle", 70, 7)
+Weapon3 = Weapon("Le boulet à Boulet", 50, 5)
+Weapon4 = Weapon("Objet phallique mauve en sillicone", 10, 1)
+Weapon5 = Weapon("Cool stick you found", 20, 2)
+Weapon6 = Weapon("Crowbar", 30, 3)
+Weapon7 = Weapon("La guit à Purok", 40, 4)
