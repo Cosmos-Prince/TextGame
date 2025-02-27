@@ -119,3 +119,29 @@ Weapon4 = Weapon("Objet phallique mauve en sillicone", 10, 1)
 Weapon5 = Weapon("Cool stick you found", 20, 2)
 Weapon6 = Weapon("Crowbar", 30, 3)
 Weapon7 = Weapon("La guit a Purok", 40, 4)
+
+
+# list containing all items
+weaponList:list = [Weapon1, Weapon2, Weapon3, Weapon4, Weapon5, Weapon6, Weapon7]
+miscList:list = [Misc1, Misc2, Misc3, Misc4, Misc5, Misc6, Misc7, Misc8, Misc9, Misc10, Misc11, Misc12, Misc13, Misc14, Misc15]
+feetList:list = [Feet1, Feet2, Feet3, Feet4, Feet5]
+pantsList:list = [Pants1, Pants2, Pants3, Pants4, Pants5]
+chestList:list = [Chest1, Chest2, Chest3, Chest4, Chest5]
+helmetList:list = [Helmet1, Helmet2, Helmet3, Helmet4, Helmet5]
+# sublists for better readability & maybe future updates
+
+itemList:list = []
+for w in weaponList:
+    itemList.append(w)
+for m in miscList:
+    itemList.append(m)
+for f in feetList:
+    itemList.append(f)
+for p in pantsList:
+    itemList.append(f)
+for c in chestList:
+    itemList.append(f)
+for h in helmetList:
+    itemList.append(f)
+# creates a list containing every item in all the other sub lists
+# itemList = [stuffList] would create a list of lists, i dont want that
