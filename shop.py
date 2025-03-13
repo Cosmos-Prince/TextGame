@@ -30,21 +30,29 @@ def getCurrentShopList():
 def comparator(player:Player, itemToCompare:Item):
     inventoryList:list = ["Helmet", "Chestplate", "Bracers / Gloves",
                            "Pants", "Shoes / Boots", "Miscellaneous","Weapon"]
+    # creates a list of all different type of items in the game
     type:str = itemToCompare.getItemType()
     for i in range(0, len(inventoryList) - 1):
         if type == inventoryList[i]:
             return i
+        # compares the list inventoryList to the item type that is chosen by the player
+        # used to verify which inventory slot to compare the chosen item to 
     if i == 5:
         print(f"You currently have :\n{player.getInventory()[5]}"
               f"\n{player.getInventory()[6]}"
               f"\n{player.getInventory()[7]}"
               f"\n{player.getInventory()[8]}")
+        # misc items have 4 slots so need to show all 4
     elif i == 6:
         print(f"You currently have :\n{player.getInventory()[9]}")
+        # special case for weapons since if i == 6 need to print list index #9
     else: 
         print(f"You currently have :\n{player.getInventory()[i]}")
+        # every other case is simple enough
+    
         
 def shopChoicesPrinter():
     print("\n Please choose an item you wish to purchase.")
     choice:int = askInput(getCurrentShopList())
+    
 
