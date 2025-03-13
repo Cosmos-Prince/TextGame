@@ -1,4 +1,3 @@
-
 class Item:
     def __init__(self, name:str, price:int, statName:str, statBonus:int, itemType:str):
         self.__itemName:str = name
@@ -8,6 +7,8 @@ class Item:
         self.__itemType:str = itemType
     # Constructor for every item, statUpgraded dictates which stat gets a bonus and itemType
     # dictates which inventory slot it will go in
+    def getItemType(self):
+        return self.__itemType 
 
     def __str__(self):
         return f"   {self.__itemName} | {self.__price} gold | +{self.__bonus} {self.__statUpgraded} | {self.__itemType}"
@@ -22,33 +23,57 @@ class Armor(Item):
     def __init__(self, name:str, price:int, statBonus:int, itemType:str):
         super().__init__(name, price, "Defense", statBonus, itemType)
 
+    def __str__():
+        super().__str__()    
+
 class Helmet(Armor):
     def __init__(self, name:str, price:int, statBonus:int):
         super().__init__(name, price, statBonus, "Helmet")
+
+    def __str__():
+        super().__str__()    
 
 class Chest(Armor):
     def __init__(self, name:str, price:int, statBonus:int):
         super().__init__(name, price, statBonus, "Chestplate")
 
+    def __str__():
+        super().__str__()    
+
 class Arms(Armor):
     def __init__(self, name:str, price:int, statBonus:int):
         super().__init__(name, price, statBonus, "Bracers / Gloves")
+
+    def __str__():
+        super().__str__()    
 
 class Pants(Armor):
     def __init__(self, name:str, price:int, statBonus:int):
         super().__init__(name, price, statBonus, "Pants")
 
+    def __str__():
+        super().__str__()    
+
 class Feet(Armor):
     def __init__(self, name:str, price:int, statBonus:int):
         super().__init__(name, price, statBonus, "Shoes / Boots")
+
+    def __str__():
+        super().__str__()    
         
 class Misc(Item):
     def __init__(self, name:str, price:int, statName:str, statBonus:int):
         super().__init__(name, price, statName, statBonus, "Miscellaneous")
 
+    def __str__():
+        super().__str__()    
+
 class Weapon(Item):
     def __init__(self, name:str, price:int, statBonus:int):
         super().__init__(name, price, "Damage", statBonus, "Weapon")
+
+    def __str__():
+        super().__str__()    
 
 # Creates all different kinds of child items to fit them into the inventory of the player
 
@@ -129,19 +154,25 @@ pantsList:list = [Pants1, Pants2, Pants3, Pants4, Pants5]
 chestList:list = [Chest1, Chest2, Chest3, Chest4, Chest5]
 helmetList:list = [Helmet1, Helmet2, Helmet3, Helmet4, Helmet5]
 # sublists for better readability & maybe future updates
+def getItemList():
+    itemList:list = []
+    for w in weaponList:
+        itemList.append(w)
+    for m in miscList:
+        itemList.append(m)
+    for f in feetList:
+        itemList.append(f)
+    for p in pantsList:
+        itemList.append(f)
+    for c in chestList:
+        itemList.append(f)
+    for h in helmetList:
+        itemList.append(f)
+    return itemList
+    # creates a list containing every item in all the other sub lists
+    # itemList = [stuffList] would create a list of lists, i dont want that
 
-itemList:list = []
-for w in weaponList:
-    itemList.append(w)
-for m in miscList:
-    itemList.append(m)
-for f in feetList:
-    itemList.append(f)
-for p in pantsList:
-    itemList.append(f)
-for c in chestList:
-    itemList.append(f)
-for h in helmetList:
-    itemList.append(f)
-# creates a list containing every item in all the other sub lists
-# itemList = [stuffList] would create a list of lists, i dont want that
+def itemListID(position:int):
+    tempList:list = getItemList()
+    return tempList[position]
+    # function to return the item at position x in the item list

@@ -8,9 +8,15 @@ def turnChoices(player, opponent):
     player.turnStart()
     match choice:
         case 1:
-            player.potionDrinking()
-            print(f"You now have {player.getHP()} hp and are left with {player.getPots()} potions")
-            # if user selects to heal, calls the drinking potion functions and displays the stats
+            if player.getPots() == 0:
+                print("\n" * 3)
+                player.potionDrinking()
+                print("\n" * 3)
+                turnChoices(player, opponent)
+            else:    
+                player.potionDrinking()
+                print(f"You now have {player.getHP()} hp and are left with {player.getPots()} potions")
+                # if user selects to heal, calls the drinking potion functions and displays the stats
         case 2:
             dmg:int = opponent.hurt(diceRoll(1, 8, player.getAtk()))
             if dmg == 0:

@@ -26,7 +26,9 @@ class Player(Character):
     # adds inventory slots for items
 
     def getInventory(self):
-        inventory:list = [self.__invHead, self.__invChest, self.__invArms, self.__invPants, self.__invFeet, self.__invMisc1, self.__invMisc2, self.__invMisc3, self.__invMisc4, self.__invWeapon]    
+        inventory:list = [self.__invHead, self.__invChest, self.__invArms, 
+                          self.__invPants, self.__invFeet, self.__invMisc1, 
+                          self.__invMisc2, self.__invMisc3, self.__invMisc4, self.__invWeapon]    
         return inventory
     # allows to see what items the player currently has, stored in a list that can be used to 
     # be compared later on
@@ -52,13 +54,16 @@ class Player(Character):
     # function to make drinking potions, heals by 1d4 + 2 and removes 1 potion from player inventory
     
     def changeGold(self, ammount:int, add:bool):
-        if add == True:
-            self.__gold += ammount
-        elif add == False:
-            self.__gold -= ammount
-        else:
-            print("how the fuck...")
-        print(f"You now have {self.__gold} gold (beaucoup de bidous ca mon homme)")    
+        if self.__gold < ammount:
+            print("T'es paummé de même pis t'essaye d'acheter ça?")
+            print("HA! On me l'avait pas fait depuis longtemps celle la")    
+            if add == True:
+                self.__gold += ammount
+            elif add == False:
+                self.__gold -= ammount
+            else:
+                print("how the fuck...")
+            print(f"You now have {self.__gold} gold (beaucoup de bidous ca mon homme)")    
     # changes the gold of the player, depending on if needed to add or substract
 
     def killRewards(self):

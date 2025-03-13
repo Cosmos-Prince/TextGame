@@ -33,6 +33,7 @@ class Character:
     
     def heal(self, healAmmount:int):
         self.__hp += healAmmount
+        
     def hurt(self, dmgDealt:int):
         trueDmg:int = self.__defense + self.__defenseUP - dmgDealt
         if trueDmg >=0:

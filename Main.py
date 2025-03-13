@@ -10,7 +10,6 @@ def Creature(Character):
         
 player1 = Player()
 # creates player1 object
-player1.getAtk()
 
 enemy = Character()
 # creates enemy object
