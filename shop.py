@@ -7,9 +7,24 @@ def numberItems():
     return random.randint(5, 9)
     # creates an int that will show a random ammount of items available in the shop
 
+purchaseHistory:list = []
+# creates/empties a purchase history list to enable stack logic for undo function
+
 startChoices:list = ["Enter the shop and see the shopkeeper's finest wares", 
                      "Leave and continue your journey"]
-askInput(startChoices)
+input = askInput(startChoices)
+match input:
+    case 1:
+        print("Hello and welcome to my shop humble adventurer!"
+        "Please take a look at my wares!")
+    case 2:
+        return
+
+
+
+def shopChoicesPrinter():
+    print("\n Please choose an item you wish to purchase.")
+    choice:int = askInput(getCurrentShopList())
 
 def getCurrentShopList():
     shopList:list = []
@@ -50,9 +65,24 @@ def comparator(player:Player, itemToCompare:Item):
         print(f"You currently have :\n{player.getInventory()[i]}")
         # every other case is simple enough
     
-        
-def shopChoicesPrinter():
-    print("\n Please choose an item you wish to purchase.")
-    choice:int = askInput(getCurrentShopList())
+def buy(itemNumber:int, player:Player):
+    itemID:Item = itemListID(itemNumber)
+    if player.getGold() < itemID.getItemPrice():
+        print("You can't buy that! You're broke af!")
+        return
+    else:
+        player.changeGold(itemID.getItemPrice(), False)
+        player.setItems(itemID)
+
+def undo():
+    if len(purchaseHistory) == 0:
+        print("You can't undo something you haven't done yet!")
+        return
+        # checks if the purchase history is empty 
+    else:
+        purchaseHistory.pop()
+        return
+        # pop simply removes the last entry of a list, removing the last purchase in the shop
+
     
 

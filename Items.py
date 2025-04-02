@@ -9,6 +9,10 @@ class Item:
     # dictates which inventory slot it will go in
     def getItemType(self):
         return self.__itemType 
+    
+    def getItemPrice(self):
+        return self.__price
+    # getter for price, used in shop price comparison/check to see if you have enough to buy
 
     def __str__(self):
         return f"   {self.__itemName} | {self.__price} gold | +{self.__bonus} {self.__statUpgraded} | {self.__itemType}"

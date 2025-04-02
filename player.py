@@ -1,5 +1,5 @@
 from character import *
-from functions import diceRoll
+from functions import diceRoll, askInput
 from Items import *
 import math
 
@@ -32,7 +32,36 @@ class Player(Character):
         return inventory
     # allows to see what items the player currently has, stored in a list that can be used to 
     # be compared later on
-    
+
+    def setItems(self, itemToEquip:Item):
+        type:str = itemToEquip.getItemType()
+        if type == "Miscellaneous":
+            choice:int = askInput([self.__invMisc1, self.__invMisc2, self.__invMisc3, self.__invMisc4])
+            match choice:
+                case 1:
+                    self.__invMisc1 = itemToEquip
+                case 2:
+                    self.__invMisc2 = itemToEquip
+                case 3:
+                    self.__invMisc3 = itemToEquip
+                case 4:
+                    self.__invMisc4 = itemToEquip
+        elif type == "Weapon":
+            self.__invWeapon = itemToEquip
+        elif type == "Helmet":
+            self.__invHead = itemToEquip
+        elif type == "Chestplate":
+            self.__invChest = itemToEquip
+        elif type == "Bracers / Gloves":
+            self.__invArms = itemToEquip
+        elif type == "Pants":
+            self.__invPants = itemToEquip
+        elif type == "Shoes / Boots":
+            self.__invFeet = itemToEquip
+        else:
+            print("I fucked up")
+
+
     def getPots(self):
         return self.__pots
     # allows to see the number of potions left in the inventory
