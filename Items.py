@@ -180,3 +180,9 @@ def itemListID(position:int):
     tempList:list = getItemList()
     return tempList[position]
     # function to return the item at position x in the item list
+
+def getItemID(item:Item):
+    for i in getItemList():
+        if item == getItemList[i]:
+            return getItemID[i]
+# returns a number associated with which item in the entire list this is, inverse of itemListID

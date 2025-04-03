@@ -36,6 +36,7 @@ class Player(Character):
     def setItems(self, itemToEquip:Item):
         type:str = itemToEquip.getItemType()
         if type == "Miscellaneous":
+            print("Which item do you wish to replace?")
             choice:int = askInput([self.__invMisc1, self.__invMisc2, self.__invMisc3, self.__invMisc4])
             match choice:
                 case 1:

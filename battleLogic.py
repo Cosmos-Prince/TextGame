@@ -3,7 +3,7 @@ from character import *
 import random
 
 def turnChoices(player, opponent):
-    choice:int = askInput([" Heal yourself using a potion", " Attack the enemy", " Prepare to block the enemy's next attack"])
+    choice:int = askInput(["Heal yourself using a potion", "Attack the enemy", "Prepare to block the enemy's next attack"])
     # shows the option the player has
     player.turnStart()
     match choice:

@@ -2,6 +2,7 @@ from character import *
 from player import *
 from functions import *
 from battleLogic import *
+from shop import *
 
 def Creature(Character):
     def __init__(self):
@@ -48,8 +49,4 @@ while player1.getHP() > 0 or enemy.getHP() > 0:
         print("You have been slain.")
         break
         # checks if the player died after enemy's turn
-        
-
-
-
-    
+  

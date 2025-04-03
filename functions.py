@@ -13,7 +13,7 @@ def askInput(choices:list):
     # prints the choices for the user
     print("Please choose your next action...")
     for i in range(0, len(choices)):
-        print(f"{i+1} -" + choices[i])
+        print(f"{i+1} - " + choices[i])
     while True:
         try:
             # tries to convert the input to an int, if succeed, return the int
@@ -24,5 +24,4 @@ def askInput(choices:list):
                 print(f"Please input a valid number (between 1 and {len(choices)})")
         except :
             print("please input a number, not whatever the fuck you put there lmao")
-
-
+        
