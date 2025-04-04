@@ -82,8 +82,7 @@ def undo(purchaseHistory:list):
         return
         # pop simply removes the last entry of a list, removing the last purchase in the shop
 
-
-def shopLogic(player:Player):
+def shopEntrance(player:Player):
     purchaseHistory:list = []
     # creates/empties a purchase history list to enable stack logic for undo function
     while True:
@@ -92,26 +91,28 @@ def shopLogic(player:Player):
         numberOfItemsInstance:int = numberItems()
         # creates a variable that stores the ammount of items for this instance of the shop
         currentShopList:list = getCurrentShopList(numberOfItemsInstance)
-        startChoices:list = ["Enter the shop and see the shopkeeper's finest wares", 
+        startChoices:list = ["See the shopkeeper's finest wares", 
                          "Leave and continue your journey"]
         input = askInput(startChoices)
         match input:
             case 1:
                 print("Hello and welcome to my shop humble adventurer!"
                 "Please take a look at my wares!\n")
+                shopMenu(player, numberOfItemsInstance, currentShopList, purchaseHistory)
             case 2:
                 print("You leave the shop and continue your journey.")
                 break
-        
-        print("\n Please choose an item you wish to purchase.")
-        choice:int = askInput(currentShopList.append("Leave the shop."))
-        if choice == len(currentShopList):
-            print("Thank you come again!")
-            break
-        else:
-            if comparator(player, currentShopList[choice]) == False:
-                
-            else:
 
             
-
+def shopMenu(player:Player, numberOfItems:int, itemInShopList:list, pruchaseHistory:list):
+    print("\n Please choose an item you wish to purchase.")
+    choice:int = askInput(itemInShopList.append("Leave the shop."))
+    if choice == len(itemInShopList):
+        print("Thank you come again!")
+        return
+    
+    else:
+        if comparator(player, itemInShopList[choice]) == False:
+            shopMenu(player, numberOfItems, itemInShopList)
+        else:
+            pruchaseHistory.append(itemInShopList[choice])
