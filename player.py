@@ -35,32 +35,46 @@ class Player(Character):
 
     def setItems(self, itemToEquip:Item):
         type:str = itemToEquip.getItemType()
+        previousItem:Item = None
         if type == "Miscellaneous":
             print("Which item do you wish to replace?")
             choice:int = askInput([self.__invMisc1, self.__invMisc2, self.__invMisc3, self.__invMisc4])
             match choice:
                 case 1:
+                    previousItem = self.__invMisc1
                     self.__invMisc1 = itemToEquip
                 case 2:
+                    previousItem = self.__invMisc2
                     self.__invMisc2 = itemToEquip
                 case 3:
+                    previousItem = self.__invMisc3
                     self.__invMisc3 = itemToEquip
                 case 4:
+                    previousItem = self.__invMisc4
                     self.__invMisc4 = itemToEquip
         elif type == "Weapon":
+            previousItem = self.__invWeapon
             self.__invWeapon = itemToEquip
         elif type == "Helmet":
+            previousItem = self.__invHead
             self.__invHead = itemToEquip
         elif type == "Chestplate":
+            previousItem = self.__invChest
             self.__invChest = itemToEquip
         elif type == "Bracers / Gloves":
+            previousItem = self.__invArms
             self.__invArms = itemToEquip
         elif type == "Pants":
+            previousItem = self.__invPants
             self.__invPants = itemToEquip
         elif type == "Shoes / Boots":
+            previousItem = self.__invFeet
             self.__invFeet = itemToEquip
         else:
             print("I fucked up")
+        return previousItem
+        # changes the item based on where it should go in the 
+        # player's inventory. Also returns previously equipped item for undo purpose
 
 
     def getPots(self):

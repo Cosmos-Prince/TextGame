@@ -53,34 +53,45 @@ def comparator(player:Player, itemToCompare:Item):
     print("Do you wish to purchase this item?")
     match askInput(["Yes", "No"]):
         case 1:
-            buy(getItemID(itemToCompare), player)
-            if buy(getItemID(itemToCompare), player) == False:
-                return False
-            else:
-                return
-
+            return
         case 2:
             return False
     
-def buy(itemNumber:int, player:Player):
+def buy(itemNumber:int, player:Player, history:list):
     itemID:Item = itemListID(itemNumber)
     if player.getGold() < itemID.getItemPrice():
         print("You can't buy that! You're broke af!")
         return False
     else:
         player.changeGold(itemID.getItemPrice(), False)
-        player.setItems(itemID)
+        history.append(BuyOperation(player, itemID))
+        return history
+    # handles the logic of buying items, checks if the player has 
+    # enough gold to buy desired item and stores info into list of purchase history
 
+class BuyOperation():
+    def __init__(self, player:Player, item:Item):
+        self.__player:Player = player
+        self.__price:int = item.getItemPrice()
+        self.__oldItem:Item = player.setItems(item)
+    
+    def undo(self):
+        self.__player.changeGold(self.__price, True)
+        self.__player.setItems(self.__oldItem)
+# class to store single transactions in the shop
+# used in undo logic
 
-def undo(purchaseHistory:list):
+def undoPurchase(purchaseHistory:list):
     if len(purchaseHistory) == 0:
         print("You can't undo something you haven't done yet!")
         return
         # checks if the purchase history is empty 
     else:
-        purchaseHistory.pop()
+        purchaseHistory.pop().undo()
         return
         # pop simply removes the last entry of a list, removing the last purchase in the shop
+        # gives it to BuyOperation's function to undo the effects of the purchase 
+        # (gold change + item change)
 
 def shopEntrance(player:Player):
     purchaseHistory:list = []
@@ -104,15 +115,25 @@ def shopEntrance(player:Player):
                 break
 
             
-def shopMenu(player:Player, numberOfItems:int, itemInShopList:list, pruchaseHistory:list):
+def shopMenu(player:Player, numberOfItems:int, itemInShopList:list, purchaseHistory:list):
     print("\n Please choose an item you wish to purchase.")
-    choice:int = askInput(itemInShopList.append("Leave the shop."))
+    choice:int = askInput(itemInShopList.append("Undo my last purchase", "Sell my items", "Leave the shop."))
     if choice == len(itemInShopList):
         print("Thank you come again!")
         return
-    
+    elif choice == len(itemInShopList) - 1:
+        print("You want to sell me your old smelly and broken gear? "
+        "HA! On me l'avais pas fait celle la depuis longtemps!")
+        shopMenu(player, numberOfItems, itemInShopList, purchaseHistory)
+
+    elif choice == len(itemInShopList) - 2:
+        undoPurchase(purchaseHistory)
     else:
-        if comparator(player, itemInShopList[choice]) == False:
-            shopMenu(player, numberOfItems, itemInShopList)
+        wishToBuy:bool = comparator(player, itemInShopList[choice])
+        if wishToBuy == False:
+            shopMenu(player, numberOfItems, itemInShopList, purchaseHistory)
         else:
-            pruchaseHistory.append(itemInShopList[choice])
+            newPurchaseHistory:list = buy(itemInShopList[choice], player, purchaseHistory)        
+            shopMenu(player, numberOfItems, itemInShopList, newPurchaseHistory)
+
+            
