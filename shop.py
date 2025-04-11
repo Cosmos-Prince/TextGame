@@ -14,10 +14,10 @@ def getCurrentShopList(numberOfItems:int):
     # all the items coded in the game. Chosen between 5-9 items and given 
     # at random out of all the getItemList() function which contains all items.
     for i in range(0, numberOfItems+1):
-        check:int = random.randint(1, len(getItemList()))
+        check:int = random.randint(1, len(getItemList()) - 1)
         # stores the id of the item
         if itemListID(check) in shopList:
-            numberItems +=1
+            numberOfItems +=1
         # checks if the check value item has already been slected, if so, tries again
         else:
             shopList.append(itemListID(check))
@@ -60,7 +60,7 @@ def comparator(player:Player, itemToCompare:Item):
 def buy(itemNumber:int, player:Player, history:list):
     itemID:Item = itemListID(itemNumber)
     if player.getGold() < itemID.getItemPrice():
-        print("You can't buy that! You're broke af!")
+        print("\n\nYou can't buy that! You're broke af!")
         return False
     else:
         player.changeGold(itemID.getItemPrice(), False)
@@ -83,7 +83,7 @@ class BuyOperation():
 
 def undoPurchase(purchaseHistory:list):
     if len(purchaseHistory) == 0:
-        print("You can't undo something you haven't done yet!")
+        print("\n\nYou can't undo something you haven't done yet!")
         return
         # checks if the purchase history is empty 
     else:
@@ -107,8 +107,7 @@ def shopEntrance(player:Player):
         input = askInput(startChoices)
         match input:
             case 1:
-                print("Hello and welcome to my shop humble adventurer!"
-                "Please take a look at my wares!\n")
+                print("\n\nHello and welcome to my shop humble adventurer!")
                 shopMenu(player, numberOfItemsInstance, currentShopList, purchaseHistory)
             case 2:
                 print("You leave the shop and continue your journey.")
@@ -116,24 +115,30 @@ def shopEntrance(player:Player):
 
             
 def shopMenu(player:Player, numberOfItems:int, itemInShopList:list, purchaseHistory:list):
-    print("\n Please choose an item you wish to purchase.")
-    choice:int = askInput(itemInShopList.append("Undo my last purchase", "Sell my items", "Leave the shop."))
-    if choice == len(itemInShopList):
+    print("\nWhat can I do for you today?")
+    choice:int = askInput(["Undo my last purchase", "Sell my items", "Leave the shop.", "Show me your stuff!"])
+    if choice == 3:
         print("Thank you come again!")
         return
-    elif choice == len(itemInShopList) - 1:
-        print("You want to sell me your old smelly and broken gear? "
+    
+    elif choice == 2:
+        print("\nYou want to sell me your old smelly and broken gear? "
         "HA! On me l'avais pas fait celle la depuis longtemps!")
         shopMenu(player, numberOfItems, itemInShopList, purchaseHistory)
 
-    elif choice == len(itemInShopList) - 2:
+    elif choice == 1:
         undoPurchase(purchaseHistory)
+
     else:
-        wishToBuy:bool = comparator(player, itemInShopList[choice])
+        itemInShopListStr:list = [] 
+        for i in itemInShopList:
+            itemInShopListStr.append(i.describeItem())
+        choice2:int = askInput(itemInShopListStr)
+        wishToBuy:bool = comparator(player, itemInShopList[choice2])
         if wishToBuy == False:
             shopMenu(player, numberOfItems, itemInShopList, purchaseHistory)
         else:
-            newPurchaseHistory:list = buy(itemInShopList[choice], player, purchaseHistory)        
+            newPurchaseHistory:list = buy(itemInShopList[choice2], player, purchaseHistory)        
             shopMenu(player, numberOfItems, itemInShopList, newPurchaseHistory)
 
             

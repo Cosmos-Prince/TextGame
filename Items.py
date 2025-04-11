@@ -14,8 +14,13 @@ class Item:
         return self.__price
     # getter for price, used in shop price comparison/check to see if you have enough to buy
 
+    def describeItem(self):
+        return (f"   {self.__itemName} | {self.__price} gold | +{self.__bonus} {self.__statUpgraded} | "
+        f"{self.__itemType}")
+
     def __str__(self):
-        return f"   {self.__itemName} | {self.__price} gold | +{self.__bonus} {self.__statUpgraded} | {self.__itemType}"
+        return (f"   {self.__itemName} | {self.__price} gold | +{self.__bonus} {self.__statUpgraded} |"
+        f"{self.__itemType}")
     # When called with print(ItemName), will print the message above with all stats.
     # Will be used in shop "interface"
 
@@ -25,59 +30,56 @@ class Item:
 # Weapon and misc are still childs of Item since they dont have the same stats changed as Armor
 class Armor(Item):
     def __init__(self, name:str, price:int, statBonus:int, itemType:str):
-        super().__init__(name, price, "Defense", statBonus, itemType)
-
-    def __str__():
-        super().__str__()    
+        super().__init__(name, price, "Defense", statBonus, itemType) 
 
 class Helmet(Armor):
     def __init__(self, name:str, price:int, statBonus:int):
         super().__init__(name, price, statBonus, "Helmet")
 
     def __str__():
-        super().__str__()    
+        Item.__str__()    
 
 class Chest(Armor):
     def __init__(self, name:str, price:int, statBonus:int):
         super().__init__(name, price, statBonus, "Chestplate")
 
     def __str__():
-        super().__str__()    
+        Item.__str__()    
 
 class Arms(Armor):
     def __init__(self, name:str, price:int, statBonus:int):
         super().__init__(name, price, statBonus, "Bracers / Gloves")
 
     def __str__():
-        super().__str__()    
+        Item.__str__()    
 
 class Pants(Armor):
     def __init__(self, name:str, price:int, statBonus:int):
         super().__init__(name, price, statBonus, "Pants")
 
     def __str__():
-        super().__str__()    
+        Item.__str__()    
 
 class Feet(Armor):
     def __init__(self, name:str, price:int, statBonus:int):
         super().__init__(name, price, statBonus, "Shoes / Boots")
 
     def __str__():
-        super().__str__()    
+        Item.__str__()    
         
 class Misc(Item):
     def __init__(self, name:str, price:int, statName:str, statBonus:int):
         super().__init__(name, price, statName, statBonus, "Miscellaneous")
 
     def __str__():
-        super().__str__()    
+        Item.__str__()    
 
 class Weapon(Item):
     def __init__(self, name:str, price:int, statBonus:int):
         super().__init__(name, price, "Damage", statBonus, "Weapon")
 
     def __str__():
-        super().__str__()    
+        Item.__str__()    
 
 # Creates all different kinds of child items to fit them into the inventory of the player
 

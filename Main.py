@@ -16,7 +16,7 @@ enemy = Character()
 # creates enemy object
 turnNumber:int = 1
 # initialises turnNumber
-
+'''
 while player1.getHP() > 0 or enemy.getHP() > 0:
     print("\n \n")    
     print("-" * 20, f"Turn {turnNumber}", "-" * 20)
@@ -50,3 +50,6 @@ while player1.getHP() > 0 or enemy.getHP() > 0:
         break
         # checks if the player died after enemy's turn
   
+'''
+
+shopEntrance(player1)
