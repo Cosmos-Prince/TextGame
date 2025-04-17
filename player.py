@@ -12,23 +12,23 @@ class Player(Character):
         self.__xp:int = 0
         self.__gold:int = 0
         self.__level:int = 1
-        self.__invHead:Helmet = None
-        self.__invChest:Chest = None
-        self.__invArms:Arms = None
-        self.__invPants:Pants = None
-        self.__invFeet:Feet = None
-        self.__invMisc1:Misc = None
-        self.__invMisc2:Misc = None
-        self.__invMisc3:Misc = None
-        self.__invMisc4:Misc = None
-        self.__invWeapon:Weapon = None
+        self.__invHead:Helmet = baseHelmet
+        self.__invChest:Chest = baseChest
+        self.__invArms:Arms = baseArms
+        self.__invPants:Pants = basePants
+        self.__invFeet:Feet = baseFeet
+        self.__invMisc1:Misc = baseMisc
+        self.__invMisc2:Misc = baseMisc
+        self.__invMisc3:Misc = baseMisc
+        self.__invMisc4:Misc = baseMisc
+        self.__invWeapon:Weapon = baseWeapon
     # creates player class, adding onto the character class giving it pots, xp, and gold
     # adds inventory slots for items
 
     def getInventory(self):
-        inventory:list = [self.__invHead, self.__invChest, self.__invArms, 
-                          self.__invPants, self.__invFeet, self.__invMisc1, 
-                          self.__invMisc2, self.__invMisc3, self.__invMisc4, self.__invWeapon]    
+        inventory:list = [self.__invHead.describeItem(), self.__invChest.describeItem(), self.__invArms.describeItem(), 
+                          self.__invPants.describeItem(), self.__invFeet.describeItem(), self.__invMisc1.describeItem(), 
+                          self.__invMisc2.describeItem(), self.__invMisc3.describeItem(), self.__invMisc4.describeItem(), self.__invWeapon.describeItem()]    
         return inventory
     # allows to see what items the player currently has, stored in a list that can be used to 
     # be compared later on
@@ -38,7 +38,7 @@ class Player(Character):
         previousItem:Item = None
         if type == "Miscellaneous":
             print("Which item do you wish to replace?")
-            choice:int = askInput([self.__invMisc1, self.__invMisc2, self.__invMisc3, self.__invMisc4])
+            choice:int = askInput([self.__invMisc1.describeItem(), self.__invMisc2.describeItem(), self.__invMisc3.describeItem(), self.__invMisc4.describeItem()])
             match choice:
                 case 1:
                     previousItem = self.__invMisc1
@@ -89,6 +89,10 @@ class Player(Character):
         return self.__gold
     # getter for player's gold
     
+    def potsAdd(self, number:int):
+        self.__pots += number
+    # adds a number of potions to the player's inventory.
+
     def potionDrinking(self):
         if self.__pots <= 0:
             print("You don't have any remaining potions, you can buy some more next time you visit a shop")
@@ -98,16 +102,13 @@ class Player(Character):
     # function to make drinking potions, heals by 1d4 + 2 and removes 1 potion from player inventory
     
     def changeGold(self, ammount:int, add:bool):
-        if self.__gold < ammount:
-            print("T'es paummé de même pis t'essaye d'acheter ça?")
-            print("HA! On me l'avait pas fait depuis longtemps celle la")    
-            if add == True:
-                self.__gold += ammount
-            elif add == False:
-                self.__gold -= ammount
-            else:
-                print("how the fuck...")
-            print(f"You now have {self.__gold} gold (beaucoup de bidous ca mon homme)")    
+        if add == True:
+            self.__gold += ammount
+        elif add == False:
+            self.__gold -= ammount
+        else:
+            print("how the fuck...")
+        print(f"You now have {self.__gold} gold (beaucoup de bidous ca mon homme)")    
     # changes the gold of the player, depending on if needed to add or substract
 
     def killRewards(self):

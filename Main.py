@@ -51,5 +51,5 @@ while player1.getHP() > 0 or enemy.getHP() > 0:
         # checks if the player died after enemy's turn
   
 '''
-
+player1.changeGold(10000,True)
 shopEntrance(player1)

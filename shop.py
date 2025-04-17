@@ -24,6 +24,21 @@ def getCurrentShopList(numberOfItems:int):
         # else, simply adds the check value item into the list
     return shopList
 
+def buyPotion(player:Player):
+    print(f"\nYou currently have {player.getPots()} potions.")
+    print("Do you wish to buy another potion?\n")
+    confirm:int = askInput(["Yes", "No"])
+    match confirm:
+        case 1:
+            if player.getGold() < potion.getItemPrice():
+                print(f"criss t ben bs mon esti t'as même pas {potion.getItemPrice()} bidous.")
+                return False
+            else:
+                player.changeGold(10, False)
+                player.potsAdd(1)
+                print(f"\nYou now have {player.getPots()} potions.")
+                return
+
 def comparator(player:Player, itemToCompare:Item):
     inventoryList:list = ["Helmet", "Chestplate", "Bracers / Gloves",
                            "Pants", "Shoes / Boots", "Miscellaneous","Weapon"]
@@ -42,42 +57,59 @@ def comparator(player:Player, itemToCompare:Item):
                       f"\n{player.getInventory()[8]}")
                 # misc items have 4 slots so need to show all 4
 
-            elif i == 6:
+            elif i == 7:
                 print(f"You currently have :\n{player.getInventory()[9]}")
-                # special case for weapons since if i == 6 need to print list index #9
+                # special case for weapons since if i == 7 need to print list index #9
 
             else: 
                 print(f"You currently have :\n{player.getInventory()[i]}")
                 # every other case is simple enough
 
     print("Do you wish to purchase this item?")
-    match askInput(["Yes", "No"]):
+    confirm:int = askInput(["Yes", "No"])
+    match confirm:
         case 1:
             return
         case 2:
             return False
     
 def buy(itemNumber:int, player:Player, history:list):
-    itemID:Item = itemListID(itemNumber)
-    if player.getGold() < itemID.getItemPrice():
-        print("\n\nYou can't buy that! You're broke af!")
-        return False
-    else:
-        player.changeGold(itemID.getItemPrice(), False)
-        history.append(BuyOperation(player, itemID))
+    if itemNumber == 1000:
+        buyPotion(player)
+        history.append(BuyOperation(player, potion))
         return history
+    else:    
+        itemID:Item = itemListID(itemNumber)
+        if player.getGold() < itemID.getItemPrice():
+            print("\n\nYou can't buy that! You're broke af!")
+            return False
+        else:
+            player.changeGold(itemID.getItemPrice(), False)
+            history.append(BuyOperation(player, itemID))
+            return history
     # handles the logic of buying items, checks if the player has 
     # enough gold to buy desired item and stores info into list of purchase history
 
 class BuyOperation():
     def __init__(self, player:Player, item:Item):
-        self.__player:Player = player
-        self.__price:int = item.getItemPrice()
-        self.__oldItem:Item = player.setItems(item)
+        if type(item) == Potion:
+            self.__player:Player = player
+            self.__price:int = potion.getItemPrice()
+            self.__oldItem:Item = potion
+        else:
+            self.__player:Player = player
+            self.__price:int = item.getItemPrice()
+            self.__oldItem:Item = player.setItems(item)
     
     def undo(self):
         self.__player.changeGold(self.__price, True)
-        self.__player.setItems(self.__oldItem)
+        if self.__oldItem == potion:
+            self.__player.potsAdd(-1)
+        else:
+            if self.__oldItem == None:
+                return
+            else:
+                self.__player.setItems(self.__oldItem)
 # class to store single transactions in the shop
 # used in undo logic
 
@@ -133,12 +165,22 @@ def shopMenu(player:Player, numberOfItems:int, itemInShopList:list, purchaseHist
         itemInShopListStr:list = [] 
         for i in itemInShopList:
             itemInShopListStr.append(i.describeItem())
+        itemInShopListStr.append(" Buy a potion")
+        print(f"\n\nYou currently have : {player.getGold()} gold.\n")
         choice2:int = askInput(itemInShopListStr)
-        wishToBuy:bool = comparator(player, itemInShopList[choice2])
+        if choice2 == len(itemInShopListStr):
+            wishToBuy:bool = True
+        else:    
+            wishToBuy:bool = comparator(player, itemInShopList[choice2 - 1])
         if wishToBuy == False:
             shopMenu(player, numberOfItems, itemInShopList, purchaseHistory)
         else:
-            newPurchaseHistory:list = buy(itemInShopList[choice2], player, purchaseHistory)        
-            shopMenu(player, numberOfItems, itemInShopList, newPurchaseHistory)
+            if choice2 == len(itemInShopListStr):
+                newPurchaseHistory:list = buy(1000, player, purchaseHistory)
+                shopMenu(player, numberOfItems, itemInShopList, newPurchaseHistory)                
+            else: 
+                itemToBuy:Item = itemInShopList[choice2 - 1]
+                newPurchaseHistory:list = buy(getItemID(itemToBuy), player, purchaseHistory)        
+                shopMenu(player, numberOfItems, itemInShopList, newPurchaseHistory)
 
             
