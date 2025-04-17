@@ -96,31 +96,37 @@ class BuyOperation():
             self.__player:Player = player
             self.__price:int = potion.getItemPrice()
             self.__oldItem:Item = potion
+            self.__itemSlot:int = None
         else:
-            self.__player:Player = player
-            self.__price:int = item.getItemPrice()
-            self.__oldItem:Item = player.setItems(item)
+            if item.getItemType() == "Miscellaneous":
+                self.__player:Player = player
+                tempList:list = player.setItems(item)
+                self.__oldItem:Item = tempList[0]
+                self.__itemSlot:int = tempList[1]
+                self.__price:int = item.getItemPrice()
+            else:
+                self.__player:Player = player
+                self.__price:int = item.getItemPrice()
+                self.__oldItem:Item = player.setItems(item)
+                self.__itemSlot:int = None
     
     def undo(self):
         self.__player.changeGold(self.__price, True)
         if self.__oldItem == potion:
             self.__player.potsAdd(-1)
+        elif self.__itemSlot != None:
+            self.__player.setItems(self.__oldItem, self.__itemSlot)
         else:
-            if self.__oldItem == None:
-                return
-            else:
-                self.__player.setItems(self.__oldItem)
+           self.__player.setItems(self.__oldItem)
 # class to store single transactions in the shop
 # used in undo logic
 
 def undoPurchase(purchaseHistory:list):
     if len(purchaseHistory) == 0:
         print("\n\nYou can't undo something you haven't done yet!")
-        return
         # checks if the purchase history is empty 
     else:
         purchaseHistory.pop().undo()
-        return
         # pop simply removes the last entry of a list, removing the last purchase in the shop
         # gives it to BuyOperation's function to undo the effects of the purchase 
         # (gold change + item change)

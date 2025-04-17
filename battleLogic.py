@@ -1,5 +1,6 @@
 from functions import *
 from character import *
+from player import *
 import random
 
 def turnChoices(player, opponent):
@@ -22,24 +23,25 @@ def turnChoices(player, opponent):
             if dmg == 0:
                 return
             else:
-                print(f"You dealt {dmg} damage to the enemy!")
+                print(f"\nYou dealt {dmg} damage to the enemy!")
             # shows the dmg dealt using hurt function
         case 3:
             d:int = player.defend()
-            print(f"You managed to increase your defense by {d}")
+            print(f"\nYou managed to increase your defense by {d}")
             # puts the result of the diceroll to add defence for the turn in d, prints the result
    
             
-def enemyChoice(opponent, player):
-    enemyChoice:int = random.randint(1,2)
-    match enemyChoice:
-        case 1:
+def enemyChoice(opponent:Creature, player:Player):
+    choiceChanceTotal:int = opponent.getAtkChance() + opponent.getDefChance()
+    threshold:float = 1/choiceChanceTotal
+    enemyChoice:int = random.uniform(0, 1)
+    if enemyChoice < threshold:
             dmg:int = player.hurt(diceRoll(1, 8, opponent.getAtk()))
             if dmg == 0:
                 return
             else:
-                print(f"The enemy did {dmg} dmg to you!")
+                print(f"\nThe enemy did {dmg} dmg to you!")
                 
-        case 2:
-            d:int = opponent.defend()
-            print(f"The opponent increased it's defense by {d}.")
+    else:
+       d:int = opponent.defend()
+       print(f"\nThe opponent increased it's defense by {d}.")

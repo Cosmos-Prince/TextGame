@@ -7,10 +7,10 @@ import math
 class Player(Character):
     def __init__(self):
         super().__init__()
-        # calls back the parent constructor cause *python*
+        # calls back the parent constructor
         self.__pots:int = 3
         self.__xp:int = 0
-        self.__gold:int = 0
+        self.__gold:int = 10
         self.__level:int = 1
         self.__invHead:Helmet = baseHelmet
         self.__invChest:Chest = baseChest
@@ -33,10 +33,17 @@ class Player(Character):
     # allows to see what items the player currently has, stored in a list that can be used to 
     # be compared later on
 
-    def setItems(self, itemToEquip:Item):
+    def setItems(self, itemToEquip:Item, itemSlot:int = None):
         type:str = itemToEquip.getItemType()
         previousItem:Item = None
-        if type == "Miscellaneous":
+        if itemSlot != None:
+            match itemSlot:
+                case 1: self.__invMisc1 = itemToEquip
+                case 2: self.__invMisc2 = itemToEquip
+                case 3: self.__invMisc3 = itemToEquip
+                case 4: self.__invMisc4 = itemToEquip
+            return
+        elif type == "Miscellaneous":
             print("Which item do you wish to replace?")
             choice:int = askInput([self.__invMisc1.describeItem(), self.__invMisc2.describeItem(), self.__invMisc3.describeItem(), self.__invMisc4.describeItem()])
             match choice:
@@ -52,6 +59,7 @@ class Player(Character):
                 case 4:
                     previousItem = self.__invMisc4
                     self.__invMisc4 = itemToEquip
+            return [previousItem, choice]
         elif type == "Weapon":
             previousItem = self.__invWeapon
             self.__invWeapon = itemToEquip
