@@ -7,6 +7,7 @@ from shop import *
 
 def battleRound(player:Player, enemy:Creature):
     turnNumber:int = 1
+    enemy.resetHP()
     # initialises turnNumber
     print(f"\n\n------You are now fighting {enemy.getName()}------\n")
     while player1.getHP() > 0 or enemy.getHP() > 0:
@@ -28,7 +29,7 @@ def battleRound(player:Player, enemy:Creature):
 
         # runs player turn
         if enemy.getHP() <= 0:
-            print("Congradulations, you defeated the enemy!")
+            print("\nCongradulations, you defeated the enemy!\n")
             player1.killRewards()
             break
             #checks if the player's hit killed

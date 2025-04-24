@@ -85,16 +85,13 @@ class Player(Character):
         # player's inventory. Also returns previously equipped item for undo purpose
 
 
-    def getPots(self):
-        return self.__pots
+    def getPots(self): return self.__pots
     # allows to see the number of potions left in the inventory
     
-    def getLvl(self):
-        return self.__level
+    def getLvl(self): return self.__level
     # getter for player's level
 
-    def getGold(self):
-        return self.__gold
+    def getGold(self): return self.__gold
     # getter for player's gold
     
     def potsAdd(self, number:int):
@@ -116,27 +113,27 @@ class Player(Character):
             self.__gold -= ammount
         else:
             print("how the fuck...")
-        print(f"You now have {self.__gold} gold (beaucoup de bidous ca mon homme)")    
+        print(f"\nYou now have {self.__gold} gold (beaucoup de bidous ca mon homme)")    
     # changes the gold of the player, depending on if needed to add or substract
 
     def killRewards(self):
         self.__xp += diceRoll(4, 10, 5) 
         self.changeGold(diceRoll(2, 10, 5), True)
-        self.lvlup()
+        self.lvlUp()
     # gives the player gold and xp per enemy kill and checks if the player can lvl up
     
     def xpToLvlUp(self):
-        return round(math.log(self.__lvl, 1.5)*100, None)
+        return round(math.log(self.__level, 1.5)*100, None)
     # function to calculate the the xp needed to lvl up
 
     def lvlUp(self):
         if self.__xp >= self.xpToLvlUp():
             self.__level += 1
             self.__xp -= self.xpToLvlUp()
-            self.__atk += 2
-            self.__hp += 10
-            self.__defense += 1
-            print(f"Congrats! You are now level {self.getLvl()} and have increased your stats! ")
+            self._atk += 2
+            self._hp += 10
+            self._defense += 1
+            print(f"\n\nCongrats! You are now level {self.getLvl()} and have increased your stats!\n")
         else:
             return
         
